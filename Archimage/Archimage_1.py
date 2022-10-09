@@ -1,8 +1,8 @@
 import sys
 from PIL import Image, ImageDraw
-from PyQt5.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QGroupBox, QLabel, QPushButton, QSizePolicy, QFrame, QWidget
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import QThread
+from PyQt5.QtCore import QThread, Qt
 
 
 class myPIL():
@@ -119,19 +119,20 @@ class myMainWindow(QMainWindow):
         self.setGeometry(250, 200, 800, 600)
         self.setWindowTitle('Archimage')
 
-        # self.pixmap = QPixmap('/home/barkas/Изображения/mclaren.jpg')
-        self.label_image = QLabel(self)
-        # self.label_image.setPixmap(self.pixmap)
-        self.image_width = self.label_image.size().width()
-        self.image_height = self.label_image.size().height()
-        self.label_image.setScaledContents(True)
+        # self.label_image = QLabel(self)
+        # self.label_image.setScaledContents(True)
+        # self.image_width = self.label_image.size().width()
+        # self.image_height = self.label_image.size().height()
 
-        self.layout_main = QHBoxLayout(self)
-        self.layout_main.addWidget(self.label_image)
+        self.button = QPushButton('Hello', self)
 
+        self.layout_main = QVBoxLayout(self)
+        self.layout_main.addWidget(self.button)
+        self.layout_main.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
+        # self.layout_main.addWidget(self.label_image)   
 
         self.mythread = myThread(mainwindow=self)       # Создаю объект нового потока 
-        self.mythread.start()                           # Запускю новый поток
+        # self.mythread.start()                           # Запускю новый поток
 
 
 class myThread(QThread):
@@ -143,8 +144,9 @@ class myThread(QThread):
 
     
     def run(self):
-        self.picture = QPixmap('/home/barkas/Изображения/mclaren.jpg')
-        self.mainwindow.label_image.setPixmap(self.picture)
+        # self.picture = QPixmap('D:\lamba.jpg')
+        # self.mainwindow.label_image.setPixmap(self.picture)
+        pass
         
 
 
