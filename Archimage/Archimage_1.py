@@ -1,5 +1,3 @@
-# Первая версия программы
-
 import sys
 from PIL import Image, ImageDraw
 from PyQt5.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QLabel
