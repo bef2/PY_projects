@@ -1,0 +1,25 @@
+    ЗАПУСК ПРОГРАММЫ
+
+Определяю родительский каталог исполняемого файла
+OK: d:\PY_projects\MTM9D
+Создаю папку в родительском каталоге
+OK
+Создаю экземпляр класса excelWriter
+Создаю xlsx файл d:\PY_projects\MTM9D\Tables_MTM9D\2022.05.18_09.08.45_MTM9D.xlsx
+OK
+Сохраняю созданный xlsx файл
+OK
+Открываю d:\PY_projects\MTM9D\Tables_MTM9D\2022.05.18_09.08.45_MTM9D.xlsx для записи шапки
+OK
+Записываю шапку
+OK
+OK: экземпляр класса excelWriter создан
+
+    НАЖАТА КНОПКА СТАРТ
+
+Вызыавю метод excelWriter.write
+Записываю строку данных
+OK
+Сохранаю d:\PY_projects\MTM9D\Tables_MTM9D\2022.05.18_09.12.44_MTM9D.xlsx
+OK
+OK: метод excelWriter.write выполнен
