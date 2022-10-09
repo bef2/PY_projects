@@ -1,6 +1,6 @@
 import sys
 from PIL import Image, ImageDraw
-from PyQt5.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QGroupBox, QLabel, QPushButton, QSizePolicy, QFrame, QWidget
+from PyQt5.QtWidgets import QApplication, QLayout, QMainWindow, QHBoxLayout, QVBoxLayout, QLabel, QPushButton, QSizePolicy, QFrame, QWidget
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QThread, Qt
 
@@ -111,28 +111,54 @@ class myMainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.picture = None
         self.image_width = None
         self.image_height = None
 
 
     def initUI(self):
-        self.setGeometry(250, 200, 800, 600)
+        self.setGeometry(150, 100, 800, 500)
+        self.setFixedSize(800, 500)
+
         self.setWindowTitle('Archimage')
 
-        self.label_image = QLabel(self)
+        #################################################################
+        self.frame_image = QFrame()
+        self.frame_image.setFixedSize(500, 450)
+
+        self.label_image = QLabel('Hello')
         self.label_image.setScaledContents(True)
-        self.image_width = self.label_image.size().width()
-        self.image_height = self.label_image.size().height()
+        # self.image_width = self.label_image.size().width()
+        # self.image_height = self.label_image.size().height()
 
-        # self.button = QPushButton('Hello')
+        self.picture = QPixmap('/home/barkas/Изображения/mclaren.jpg')
+        self.label_image.setPixmap(self.picture)
 
-        self.layout_main = QVBoxLayout(self)
-        # self.layout_main.addWidget(self.button)
-        self.layout_main.addWidget(self.label_image)
+        self.layout_image = QVBoxLayout(self.frame_image)
+        self.layout_image.addWidget(self.label_image)
+
+        #################################################################
+        self.frame_buttons = QFrame()
+        self.frame_buttons.setFixedSize(250, 450)
 
 
+        self.button1 = QPushButton('Hello')
+        self.button2 = QPushButton('Hello')
+        self.button3 = QPushButton('Hello')
+
+        self.layout_buttons = QVBoxLayout(self.frame_buttons)
+        self.layout_buttons.addWidget(self.button1)
+        self.layout_buttons.addWidget(self.button2)
+        self.layout_buttons.addWidget(self.button3)
+
+        #################################################################
+        self.layout_main = QHBoxLayout(self)
+        self.layout_main.addWidget(self.frame_image)
+        self.layout_main.addWidget(self.frame_buttons)
+
+        #################################################################
         self.mythread = myThread(mainwindow=self)       # Создаю объект нового потока 
-        # self.mythread.start()                           # Запускю новый поток
+        self.mythread.start()                           # Запускю новый поток
 
 
 class myThread(QThread):
@@ -140,15 +166,12 @@ class myThread(QThread):
     def __init__(self, mainwindow):
         super().__init__()
         self.mainwindow = mainwindow
-        self.picture = None
+        self.image = myPIL()
 
     
     def run(self):
-        self.picture = QPixmap('/home/barkas/Изображения/mclaren.jpg')
-        self.mainwindow.label_image.setPixmap(self.picture)
         pass
         
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -1,65 +1,41 @@
 import sys
-from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout, QWidget
+from PIL import Image, ImageDraw
+from PyQt5.QtWidgets import QApplication, QLayout, QMainWindow, QHBoxLayout, QVBoxLayout, QLabel, QPushButton, QSizePolicy, QFrame, QWidget
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import QThread, Qt
 
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-import matplotlib.pyplot as plt
 
-import random
+class myMainWindow(QWidget):
 
-class Window(QWidget):
     def __init__(self):
         super().__init__()
+        self.initUI()
 
-        # экземпляр фигуры для построения
-        self.figure = plt.figure()
-        plt.title("Зависимости: y1 = x, y2 = x^2")
-        plt.xlabel("x")
-        plt.ylabel("y1, y2")
-        plt.grid()
 
-        # это виджет холста(Canvas), который отображает 'figure'
-        # он принимает экземпляр `figure` в качестве параметра для __init__
-        self.canvas = FigureCanvas(self.figure)
+    def initUI(self):
+        self.setGeometry(150, 100, 800, 500)
+        self.setWindowTitle('Archimage')
 
-        # это виджет навигации
-        # он принимает виджет холста(Canvas) и родителя
-        self.toolbar = NavigationToolbar(self.canvas, self)
+        # self.frame_image = QFrame()
 
-        # Просто какая-то кнопка, связанная с методом `plot`
-        self.button = QPushButton('Plot')
-        self.button.clicked.connect(self.plot)
+        # self.label_image = QLabel('Hello')
+        
+        # self.layout_image = QVBoxLayout(self.frame_image)
+        # self.layout_image.addWidget(self.label_image)
 
-        # set the layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.toolbar)
-        layout.addWidget(self.canvas)
-        layout.addWidget(self.button)
-        self.setLayout(layout)
+        # self.layout_main = QHBoxLayout(self)
+        # self.layout_main.addWidget(self.frame_image)
 
-    def plot(self):
-        ''' plot some random stuff '''
-        # random data
-        data = [random.random() for i in range(10)]
+        self.layout_main = QVBoxLayout(self)
+        self.layout_image = QVBoxLayout(self.layout_main)
+        
+        self.label_image = QLabel('Hello')
+        self.layout_image.addWidget(self.label_image)
 
-        # instead of ax.hold(False)
-        self.figure.clear()
 
-        # create an axis
-        ax = self.figure.add_subplot(111)
 
-        plt.yscale('log')
-
-        # plot data
-        ax.plot(data, '*-')
-
-        # refresh canvas
-        self.canvas.draw()
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-
-    main = Window()
-    main.show()
-
-    sys.exit(app.exec_())
+    win = myMainWindow()
+    win.show()
+    sys.exit(app.exec())
