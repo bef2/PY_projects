@@ -11,4 +11,8 @@ def pow(a: float, n: int):
         return pow(a ** 2, n // 2)
 
 
-print(pow(2, 5))
+def pow2(a, n):
+    if n == 0:
+        return 1
+    return pow2(a, n - 1) * a
+

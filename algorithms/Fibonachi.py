@@ -6,5 +6,5 @@ def fib(n):
         rec_fib[i] = rec_fib[i - 1] + rec_fib[i - 2]
     return rec_fib[n]
 
-for i in range(20):
-    print(fib(i), end='  ')
+
+print(fib(10), end='  ')

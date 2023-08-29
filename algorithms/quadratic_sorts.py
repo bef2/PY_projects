@@ -4,30 +4,40 @@
 
 def insert_sort(A): # Рабтает быстрее в зависимости от состояния массива
     """ сортировка списка А вставками """
-    N = len(A)
-    for top in range(1, N):
-        k = top
-        while k > 0 and A[k-1] > A[k]:
-            A[k], A[k-1] = A[k-1], A[k]
-            k -= 1
+    for i in range(1, len(A)):
+        tmp = i
+        while tmp > 0 and A[tmp-1] > A[tmp]:
+            A[tmp], A[tmp-1] = A[tmp-1], A[tmp]
+            tmp -= 1
+            
+            
+def insert_sort_fast(A):
+    """Сортировка списка вставками"""
+    for i in range(1, len(A)):
+        tmp = A[i]
+        j = i - 1
+        while j >= 0 and A[j] > tmp:
+            A[j + 1] = A[j]
+            j -= 1
+        A[j + 1] = tmp
 
  
 def choise_sort(A):
     """ сортировка списка А выбором """
     N = len(A)
     for pos in range(0, N - 1):
-        for k in range(pos + 1, N):
-            if A[k] < A[pos]:
-                A[k], A[pos] = A[pos], A[k]
+        for j in range(pos + 1, N):
+            if A[j] < A[pos]:
+                A[j], A[pos] = A[pos], A[j]
 
 
 def bubble_sort(A):
     """ сортировка списка А методом пузырька """
     N = len(A)
     for bypass in range(1, N):
-        for k in range(0, N - bypass):
-            if A[k] > A[k+1]:
-                A[k], A[k+1] = A[k+1], A[k]
+        for j in range(N - bypass):
+            if A[j] > A[j+1]:
+                A[j], A[j+1] = A[j+1], A[j]
 
 
 def test_sort(sort_algorithm):

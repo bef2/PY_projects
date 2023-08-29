@@ -1,7 +1,6 @@
 
-# Слияние массивов в один
-
 def merge(A: list, B: list):
+    '''Слияние массивов в один'''
     C = [0] * (len(A) + len(B))
     i = k = n = 0
     while i < len(A) and k < len(B):
